@@ -3,7 +3,7 @@
 
 
 var isRainMade = false;
-var rains = new Array(20);
+var rains = []
 var a = 0;
 
 var delay = new Tone.FeedbackDelay(0.6,0.5);
@@ -30,7 +30,7 @@ class Rain{
   constructor(x,y){
   this.x = x;
   this.y = y;
-  this.gravity = random(1,5);
+  this.gravity = int(random(2,5));
   }
 
   draw(x,y){
@@ -54,12 +54,9 @@ function setup(){
 }
 
 function mouseClicked(){
-  rains[a] = new Rain(mouseX,mouseY);
-  a += 1;
-
+  var g = new Rain(mouseX,mouseY);
+  rains.push(g);
   isRainMade = true;
-  console.log(a);
-  console.log(rains[0].y);
   return false;
   }
 
@@ -71,12 +68,11 @@ function draw(){
   fill(d);
 
   if(isRainMade == true){
-  for(let i = 0; i < a ;i++){
+  for(let i = rains.length -1 ; i >= 0 ;i--){
   rains[i].draw();
   rains[i].fall();
-  console.log(rains[0].y);
 
-  if(rains[i].y == 300.5 || rains[i].y == 299.5){
+  if(rains[i].y > 300){
     var c;
     if(rains[i].x > 0 && rains[i].x < 100){
       c = "C5";
@@ -104,7 +100,9 @@ function draw(){
     }
     synth.triggerAttackRelease(c, "8n");
      }
-
+     if(rains[i].y > 303){
+       rains.splice(i,1);
+     }
   }
 
   }
