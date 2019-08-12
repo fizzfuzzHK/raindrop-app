@@ -30,7 +30,7 @@ class Rain{
   constructor(x,y){
   this.x = x;
   this.y = y;
-  this.gravity = 2;
+  this.gravity = random(1,5);
   }
 
   draw(x,y){
