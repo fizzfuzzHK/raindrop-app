@@ -24,6 +24,7 @@ const synth = new Tone.Synth(option).chain(delay, limiter, Tone.Master);
 //p5.js
 var isRainMade = false;
 var rains = []
+var song;
 
 //Rain class
 class Rain{
@@ -45,11 +46,15 @@ class Rain{
   }
 }
 
+function preload(){
+  song = loadSound("..//images/rain.mp3");
+}
 //setup
 function setup(){
   createCanvas(800,300);
   frameRate(100);
-
+  song.setVolume(4.5);
+  song.loop();
 }
 
 //create instance when mouseClicked
